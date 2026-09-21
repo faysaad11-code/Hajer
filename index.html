@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مقهى هجير | Hajer Coffee</title>
+  
+  <!-- خط تجوال العربي الفاخر -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
+  <!-- مكتبة أيقونات FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --brand-purple: #744d93;
+      --brand-purple-dark: #53336e;
+      --brand-purple-light: #9168b2;
+      --brand-cream: #efe4d2;
+      --cream-bg: #faf7f2;
+      --text-dark: #222222;
+      --text-muted: #666666;
+      --white: #ffffff;
+      --border-radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Tajawal', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: #120317;
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* حاوية العرض بتصميم تطبيق جوال */
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      background-color: var(--cream-bg);
+      min-height: 100vh;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* الهيدر الأرجواني */
+    .header {
+      background: linear-gradient(180deg, var(--brand-purple-dark) 0%, var(--brand-purple) 100%);
+      color: var(--white);
+      padding: 24px 20px 20px 20px;
+      text-align: center;
+      border-bottom-left-radius: 28px;
+      border-bottom-right-radius: 28px;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    /* حاوية اللوجو الدائري */
+    .logo-wrapper {
+      position: relative;
+      width: 105px;
+      height: 105px;
+      margin: 0 auto 12px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+    }
+
+    .brand-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.5px;
+      margin-bottom: 2px;
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      color: var(--brand-cream);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(239, 228, 210, 0.4);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #2ec4b6;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #2ec4b6;
+    }
+
+    /* أزرار التنقل السريعة */
+    .quick-actions {
+      display: flex;
+      gap: 10px;
+      padding: 16px 20px;
+      background: var(--white);
+      margin: -15px 20px 15px 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      position: relative;
+      z-index: 5;
+    }
+
+    .action-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      color: var(--brand-purple);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px;
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+
+    .action-btn:active {
+      background: #f0e6f2;
+    }
+
+    .action-btn i {
+      font-size: 18px;
+      color: var(--brand-cream);
+      background: var(--brand-purple);
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    /* شريط البحث والتصنيفات */
+    .content-section {
+      padding: 0 20px 80px 20px;
+      flex: 1;
+    }
+
+    .search-box {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin-bottom: 16px;
+      border: 1px solid #eee;
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      background: transparent;
+    }
+
+    .categories-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      scrollbar-width: none;
+    }
+
+    .categories-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-chip {
+      white-space: nowrap;
+      padding: 8px 16px;
+      background: var(--white);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      border: 1px solid #ebdbe8;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cat-chip.active {
+      background: var(--brand-purple);
+      color: var(--brand-cream);
+      border-color: var(--brand-purple);
+    }
+
+    /* قائمة المنتجات */
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--brand-purple);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .item-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      border: 1px solid #f0e6f0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .item-card::after {
+      content: '';
+      position: absolute;
+      left: -10px;
+      bottom: -10px;
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, rgba(116,77,147,0.05) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .item-info {
+      flex: 1;
+    }
+
+    .item-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .item-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .item-price {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--brand-purple);
+    }
+
+    .item-price span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--brand-purple-light);
+      margin-right: 2px;
+    }
+
+    .fav-btn {
+      background: #fcf8ff;
+      border: 1px solid #f0d8f5;
+      color: #bbb;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .fav-btn.active {
+      color: #e63946;
+      background: #ffebee;
+      border-color: #ffcdd2;
+    }
+
+    /* كارت الخريطة والموقع */
+    .location-card {
+      background: var(--brand-purple);
+      color: #fff;
+      border-radius: var(--border-radius);
+      padding: 16px;
+      margin-top: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .location-card h3 {
+      color: var(--brand-cream);
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .location-card p {
+      font-size: 13px;
+      opacity: 0.9;
+      margin-bottom: 14px;
+    }
+
+    .btn-map {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--brand-cream);
+      color: var(--brand-purple-dark);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 25px;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* الشريط السفلي للتواصل */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      max-width: 480px;
+      background: var(--white);
+      border-top: 1px solid #eee;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
+      z-index: 100;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .share-btn {
+      background: var(--brand-purple);
+      color: var(--brand-cream);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- الهيدر مع اللوجو الدائري الجديد -->
+    <header class="header">
+      <div class="logo-wrapper">
+        <img src="logo.png" alt="شعار مقهى هجير" class="logo-img">
+      </div>
+      <h1 class="brand-title">مقهى هجير</h1>
+      <p class="brand-subtitle">HAJER COFFEE</p>
+      
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span>مفتوح الآن • يغلق 1:00 AM</span>
+      </div>
+    </header>
+
+    <!-- أزرار الاختصارات السريعة -->
+    <div class="quick-actions">
+      <a href="#menu" class="action-btn">
+        <i class="fa-solid fa-mug-hot"></i>
+        <span>المنيو</span>
+      </a>
+      <a href="#location" class="action-btn">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>الموقع</span>
+      </a>
+      <a href="tel:+966500000000" class="action-btn">
+        <i class="fa-solid fa-phone"></i>
+        <span>اتصل بنا</span>
+      </a>
+    </div>
+
+    <!-- محتوى الصفحة -->
+    <div class="content-section">
+      
+      <!-- شريط البحث -->
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass" style="color: #aaa;"></i>
+        <input type="text" id="searchInput" placeholder="ابحث عن مشروبك أوالحلى..." onkeyup="filterMenu()">
+      </div>
+
+      <!-- التصنيفات -->
+      <div class="categories-scroll">
+        <button class="cat-chip active" onclick="filterCategory('all', this)">الكل</button>
+        <button class="cat-chip" onclick="filterCategory('today', this)">قهوة اليوم</button>
+        <button class="cat-chip" onclick="filterCategory('v60', this)">آيس دريب V60</button>
+        <button class="cat-chip" onclick="filterCategory('cold', this)">المشروبات الباردة</button>
+        <button class="cat-chip" onclick="filterCategory('sweets', this)">الحلى</button>
+      </div>
+
+      <!-- المنيو -->
+      <div id="menu">
+        <div class="section-title">
+          <i class="fa-solid fa-list" style="color: var(--brand-purple);"></i>
+          <span>قائمة المشروبات والحلى</span>
+        </div>
+
+        <div class="menu-grid" id="menuItems">
+          
+          <!-- قهوة اليوم -->
+          <div class="item-card" data-cat="today">
+            <div class="item-info">
+              <div class="item-title">قهوة اليوم - كبير</div>
+              <div class="item-desc">قهوة فلتر مميزة محضرة طازجة</div>
+              <div class="item-price">7.75 <span>SR</span></div>
+            </div>
+            <button class="fav-btn" onclick="toggleFav(this)"><i class="fa-solid fa-heart"></i></button>
+          </div>
+
+          <div class="item-card" data-cat="today">
+            <div class="item-info">
+              <div class="item-title">قهوة اليوم - صغير</div>
+              <div class="item-desc">قهوة فلتر مميزة محضرة طازجة</div>
+              <div class="item-price">5.75 <span>SR</span></div>
+            </div>
+            <button class="fav-btn" onclick="toggleFav(this)"><i class="fa-solid fa-heart"></i></button>
+          </div>
+
+          <!-- آيس دريب -->
+          <div class="item-card" data-cat="v60">
+            <div class="item-info">
+              <div class="item-title">آيس دريب V60 - بارد</div>
+              <div class="item-desc">تقطير مختص بحبوب كوستاريكية فاخرة</div>
+              <div class="item-price">13 <span>SR</span></div>
+            </div>
+            <button class="fav-btn" onclick="toggleFav(this)"><i class="fa-solid fa-heart"></i></button>
+          </div>
+
+          <div class="item-card" data-cat="v60">
+            <div class="item-info">
+              <div class="item-title">آيس دريب V60 - حار</div>
+              <div class="item-desc">تقطير كلاسيكي ذو إيحاءات متوازنة</div>
+              <div class="item-price">12 <span>SR</span></div>
+            </div>
+            <button class="fav-btn" onclick="toggleFav(this)"><i class="fa-solid fa-heart"></i></button>
+          </div>
+
+          <!-- المشروبات الباردة -->
+          <div class="item-card" data-cat="cold">
+            <div class="item-info">
+              <div class="item-title">آيس هجير (Ice Hajer)</div>
+              <div class="item-desc">مشروب هجير الخاص والمريح للرحلة</div>
+              <div class="item-price">10 <span>SR</span></div>
+            </div>
+            <button class="fav-btn" onclick="toggleFav(this)"><i class="fa-solid fa-heart"></i></button>
+          </div>
+
+          <div class="item-card" data-cat="cold">
+            <div class="item-info">
+              <div class="item-title">موكتيل هجير (Mocktail Hajer)</div>
+              <div class="item-desc">خلطة منعشة بنكهات متناغمة</div>
+              <div class="item-price">10 <span>SR</span></div>
+            </div>
+            <button class="fav-btn" onclick="toggleFav(this)"><i class="fa-solid fa-heart"></i></button>
+          </div>
+
+          <div class="item-card" data-cat="cold">
+            <div class="item-info">
+              <div class="item-title">آيس كركديه</div>
+              <div class="item-desc">بارد ومنعش في الأجواء الصيفية</div>
+              <div class="item-price">9 <span>SR</span></div>
+            </div>
+            <button class="fav-btn" onclick="toggleFav(this)"><i class="fa-solid fa-heart"></i></button>
+          </div>
+
+          <!-- الحلى -->
+          <div class="item-card" data-cat="sweets">
+            <div class="item-info">
+              <div class="item-title">تشيز كيك سنيكرز</div>
+              <div class="item-desc">الأكثر طلباً بشهادة زوار المقهى</div>
+              <div class="item-price">14 <span>SR</span></div>
+            </div>
+            <button class="fav-btn" onclick="toggleFav(this)"><i class="fa-solid fa-heart"></i></button>
+          </div>
+
+          <div class="item-card" data-cat="sweets">
+            <div class="item-info">
+              <div class="item-title">سان سباستيان</div>
+              <div class="item-desc">قوام كريمي غني ولذيذ</div>
+              <div class="item-price">14 <span>SR</span></div>
+            </div>
+            <button class="fav-btn" onclick="toggleFav(this)"><i class="fa-solid fa-heart"></i></button>
+          </div>
+
+          <div class="item-card" data-cat="sweets">
+            <div class="item-info">
+              <div class="item-title">كوكيز هجير</div>
+              <div class="item-desc">هش ومحشو بقطع الشوكولاتة</div>
+              <div class="item-price">13 <span>SR</span></div>
+            </div>
+            <button class="fav-btn" onclick="toggleFav(this)"><i class="fa-solid fa-heart"></i></button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- كارت الموقع والخرائط -->
+      <div class="location-card" id="location">
+        <h3>تفضل بزيارتنا</h3>
+        <p>نعدّ لك القهوة بكل حب وطاقات هجير الاصيلة</p>
+        <a href="https://maps.google.com" target="_blank" class="btn-map">
+          <i class="fa-solid fa-diamond-turn-right"></i>
+          <span>فتح الموقع في خرائط Google</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- الشريط السفلي -->
+    <div class="footer-bar">
+      <div class="footer-text">© مقهى هجير - جميع الحقوق محفوظة</div>
+      <button class="share-btn" onclick="shareWebsite()">
+        <i class="fa-solid fa-share-nodes"></i>
+        <span>مشاركة</span>
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    // تفعيل وتعديل المفضلة
+    function toggleFav(btn) {
+      btn.classList.toggle('active');
+    }
+
+    // تصفية العناصر بحسب التصنيف
+    function filterCategory(cat, element) {
+      document.querySelectorAll('.cat-chip').forEach(chip => chip.classList.remove('active'));
+      element.classList.add('active');
+
+      const items = document.querySelectorAll('.item-card');
+      items.forEach(item => {
+        if (cat === 'all' || item.getAttribute('data-cat') === cat) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // التصفية والبحث بالنص
+    function filterMenu() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const items = document.querySelectorAll('.item-card');
+
+      items.forEach(item => {
+        const title = item.querySelector('.item-title').innerText.toLowerCase();
+        const desc = item.querySelector('.item-desc').innerText.toLowerCase();
+        
+        if (title.includes(input) || desc.includes(input)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // مشاركة الموقع
+    function shareWebsite() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'مقهى هجير | Hajer Coffee',
+          text: 'استكشف قائمة مشروبات وحلى مقهى هجير!',
+          url: window.location.href,
+        });
+      } else {
+        alert('تم نسخ رابط الموقع للحافظة!');
+      }
+    }
+  </script>
+</body>
+</html>
